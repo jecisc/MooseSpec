@@ -12,21 +12,23 @@ BaselineOfMooseSpec >> baseline: spec [
 	<baseline>
 	spec
 		for: #common
-		do: [
-			"Dependencies"
+		do: [ "Dependencies"
 			self
 				famix: spec;
 				spec: spec.
-				
+
 			"Packages"
 			spec
 				package: 'MooseSpec-Core' with: [ spec requires: #('Famix' 'Spec') ];
-				package: 'MooseSpec-Core-Tests' with: [ spec requires: #('MooseSpec-Core' 'FamixTests') ].
+				package: 'MooseSpec-Queries' with: [ spec requires: #('MooseSpec-Core') ];
+				package: 'MooseSpec-Core-Tests' with: [ spec requires: #('MooseSpec-Core' 'FamixTests') ];
+				package: 'MooseSpec-Queries-Tests' with: [ spec requires: #('MooseSpec-Queries' 'MooseSpec-Core-Tests') ];
+				package: 'MooseSpec-Presentation' with: [ spec requires: #('MooseSpec-Queries') ].
 
 			"Groups"
 			spec
-				group: 'Core' with: #('MooseSpec-Core');
-				group: 'Tests' with: #('MooseSpec-Core-Tests') ]
+				group: 'Core' with: #('MooseSpec-Core' 'MooseSpec-Queries' 'MooseSpec-Presentation');
+				group: 'Tests' with: #('MooseSpec-Core-Tests' 'MooseSpec-Queries-Tests') ]
 ]
 
 { #category : #dependencies }
