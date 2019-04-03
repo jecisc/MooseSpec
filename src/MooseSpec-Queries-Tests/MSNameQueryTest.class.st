@@ -1,7 +1,7 @@
 Class {
 	#name : #MSNameQueryTest,
 	#superclass : #MSAbstractQueryTest,
-	#category : #'MooseSpec-Queries-Tests'
+	#category : #'MooseSpec-Queries-Tests-Terminal'
 }
 
 { #category : #helpers }
@@ -23,6 +23,5 @@ MSNameQueryTest >> testRunOn [
 	query := MSNameQuery fromString: 'LANP'.
 
 	self assert: (query runOn: classes) size equals: 3.
-	self flag: #mooseTodo. "We should not have to cast the array as a Moose group. See issue: https://github.com/moosetechnology/Moose/issues/1485. Remove this workaround when the issues will be fixed."
-	self assertCollection: ((query runOn: classes) collect: #name) hasSameElements: #('LANPool' 'LANPacket' 'LANPrintServer') asMooseGroup
+	self assertCollection: ((query runOn: classes) collect: #name) hasSameElements: #('LANPool' 'LANPacket' 'LANPrintServer')
 ]
