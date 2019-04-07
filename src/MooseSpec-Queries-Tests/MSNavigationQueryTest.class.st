@@ -71,6 +71,17 @@ MSNavigationQueryTest >> testIncomingInvocation2 [
 ]
 
 { #category : #tests }
+MSNavigationQueryTest >> testLocalIncomingInvocation [
+	| grp |
+	grp := MooseAbstractGroup new.
+	grp add: (model entityNamed: 'Smalltalk::LANPacket.contents()').
+
+	query := MSNavigationQuery association: (MSAssociationNavigationQueryStrategy with: FamixStInvocation) direction: MSLocalIncomingNavigationQueryStrategy.
+
+	self assert: (query runOn: grp) size equals: 3
+]
+
+{ #category : #tests }
 MSNavigationQueryTest >> testOutgoingInheritance [
 	| grp |
 	grp := MooseAbstractGroup new.
