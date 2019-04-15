@@ -20,6 +20,16 @@ MSAbstractAssociationNavigationQueryStrategy >> queryIncomingWith: anEntity [
 ]
 
 { #category : #action }
+MSAbstractAssociationNavigationQueryStrategy >> queryLocalIncomingWith: anEntity [
+	^ self subclassResponsibility
+]
+
+{ #category : #action }
+MSAbstractAssociationNavigationQueryStrategy >> queryLocalOutgoingWith: anEntity [
+	^ self subclassResponsibility
+]
+
+{ #category : #action }
 MSAbstractAssociationNavigationQueryStrategy >> queryOutgoingWith: anEntity [
 	^ self subclassResponsibility
 ]

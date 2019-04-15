@@ -1,7 +1,7 @@
 Class {
 	#name : #MSNavigationQueryTest,
 	#superclass : #MSAbstractQueryTest,
-	#category : #'MooseSpec-Queries-Tests'
+	#category : #'MooseSpec-Queries-Tests-Terminal'
 }
 
 { #category : #helpers }
@@ -74,11 +74,28 @@ MSNavigationQueryTest >> testIncomingInvocation2 [
 MSNavigationQueryTest >> testLocalIncomingInvocation [
 	| grp |
 	grp := MooseAbstractGroup new.
-	grp add: (model entityNamed: 'Smalltalk::LANPacket.contents()').
+	grp add: (model entityNamed: 'Smalltalk::LANAbstractDestinationAddress').
 
-	query := MSNavigationQuery association: (MSAssociationNavigationQueryStrategy with: FamixStInvocation) direction: MSLocalIncomingNavigationQueryStrategy.
+	query := MSNavigationQuery association: MSAllAssociationsNavigationQueryStrategy new direction: MSLocalIncomingNavigationQueryStrategy.
+	self assert: (query runOn: grp) size equals: 1.
+	self assert: (query runOn: grp) anyOne mooseName equals: 'Smalltalk::LANSingleDestinationAddress'.
 
-	self assert: (query runOn: grp) size equals: 3
+	query := MSNavigationQuery association: MSAllAssociationsNavigationQueryStrategy new direction: MSIncomingNavigationQueryStrategy.
+	self assert: (query runOn: grp) size equals: 2
+]
+
+{ #category : #tests }
+MSNavigationQueryTest >> testLocalOutgoingInvocation [
+	| grp |
+	grp := MooseAbstractGroup new.
+	grp add: (model entityNamed: 'Smalltalk::LANAbstractDestinationAddress').
+	
+	query := MSNavigationQuery association: MSAllAssociationsNavigationQueryStrategy new direction: MSLocalOutgoingNavigationQueryStrategy.
+	self assert: (query runOn: grp) size equals: 1.
+	self assert: (query runOn: grp) anyOne mooseName equals: 'Smalltalk::Object'.
+
+	query := MSNavigationQuery association: MSAllAssociationsNavigationQueryStrategy new direction: MSOutgoingNavigationQueryStrategy.
+	self assert: (query runOn: grp) size equals: 2
 ]
 
 { #category : #tests }

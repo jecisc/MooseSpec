@@ -5,7 +5,7 @@ Class {
 		'model',
 		'query'
 	],
-	#category : #'MooseSpec-Queries-Tests'
+	#category : #'MooseSpec-Queries-Tests-Core'
 }
 
 { #category : #testing }

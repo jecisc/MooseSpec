@@ -102,8 +102,7 @@ MSAssociationNavigationQueryStrategy >> queryIncomingWith: anEntity [
 
 { #category : #action }
 MSAssociationNavigationQueryStrategy >> queryLocalIncomingWith: anEntity [
-	^ self associations
-		flatCollect: [ :each | (anEntity queryLocalIncoming: each) opposites ]
+	^ self associations flatCollect: [ :each | (anEntity queryLocalIncoming: each) opposites ]
 ]
 
 { #category : #action }
