@@ -46,6 +46,42 @@ MSAssociationNavigationQueryStrategy >> displayIncomingOn: aStream [
 ]
 
 { #category : #printing }
+MSAssociationNavigationQueryStrategy >> displayLocalIncomingOn: aStream [
+	"The condition is not really needed since the generated script of one branch will be valid all the time, but it is present to print a nicer script to the user."
+
+	self associations size = 1
+		ifTrue: [ aStream
+				<< '(entity queryLocalIncoming: ';
+				print: self associations anyOne;
+				<< ') opposites' ]
+		ifFalse: [ aStream << '({ '.
+			self associations
+				do: [ :asso | aStream print: asso ]
+				separatedBy: [ aStream << ' . ' ].
+			aStream
+				<<
+					' } flatCollect: [ :association | (entity queryLocalIncoming: association) opposites ])' ]
+]
+
+{ #category : #printing }
+MSAssociationNavigationQueryStrategy >> displayLocalOutgoingOn: aStream [
+	"The condition is not really needed since the generated script of one branch will be valid all the time, but it is present to print a nicer script to the user."
+
+	self associations size = 1
+		ifTrue: [ aStream
+				<< 'entity queryLocalOutgoing: ';
+				print: self associations anyOne;
+				<< ') opposites' ]
+		ifFalse: [ aStream << '({ '.
+			self associations
+				do: [ :asso | aStream print: asso ]
+				separatedBy: [ aStream << ' . ' ].
+			aStream
+				<<
+					' } flatCollect: [ :association | (entity queryLocalOutgoing: association) opposites ])' ]
+]
+
+{ #category : #printing }
 MSAssociationNavigationQueryStrategy >> displayOutgoingOn: aStream [
 	"The condition is not really needed since the generated script of one branch will be valid all the time, but it is present to print a nicer script to the user."
 
@@ -62,6 +98,18 @@ MSAssociationNavigationQueryStrategy >> displayOutgoingOn: aStream [
 { #category : #action }
 MSAssociationNavigationQueryStrategy >> queryIncomingWith: anEntity [
 	^ self associations flatCollect: [ :each | (anEntity queryIncoming: each) opposites ]
+]
+
+{ #category : #action }
+MSAssociationNavigationQueryStrategy >> queryLocalIncomingWith: anEntity [
+	^ self associations
+		flatCollect: [ :each | (anEntity queryLocalIncoming: each) opposites ]
+]
+
+{ #category : #action }
+MSAssociationNavigationQueryStrategy >> queryLocalOutgoingWith: anEntity [
+	^ self associations
+		flatCollect: [ :each | (anEntity queryLocalOutgoing: each) opposites ]
 ]
 
 { #category : #action }

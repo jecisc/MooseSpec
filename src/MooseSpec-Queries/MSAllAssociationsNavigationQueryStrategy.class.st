@@ -20,6 +20,16 @@ MSAllAssociationsNavigationQueryStrategy >> queryIncomingWith: anEntity [
 ]
 
 { #category : #action }
+MSAllAssociationsNavigationQueryStrategy >> queryLocalIncomingWith: anEntity [
+	^ anEntity queryAllLocalIncoming  opposites
+]
+
+{ #category : #action }
+MSAllAssociationsNavigationQueryStrategy >> queryLocalOutgoingWith: anEntity [
+	^ anEntity queryAllLocalOutgoing opposites
+]
+
+{ #category : #action }
 MSAllAssociationsNavigationQueryStrategy >> queryOutgoingWith: anEntity [
 	^ anEntity queryAllOutgoing opposites
 ]
