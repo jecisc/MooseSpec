@@ -37,7 +37,7 @@ BaselineOfMooseSpec >> famix: spec [
 		baseline: 'Famix'
 			with: [ spec
 				loads: #('Core' 'Basic' 'ModelCompatibility' 'ModelJava' 'ModelSmalltalk' 'Importers');
-				repository: 'github://jecisc/Famix:v3.x.x/src' ];
+				repository: 'github://jecisc/Famix:development/src' ];
 		project: 'FamixTests' copyFrom: 'Famix' with: [ spec loads: #('Tests') ]
 ]
 
